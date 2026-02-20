@@ -36,10 +36,10 @@ def register():
             cur.execute("INSERT INTO users (username, password) VALUES (?, ?)",
                         (username, generate_password_hash(password)))
             conn.commit()
-            flash("Registration successful. Please login.","success")
+            flash("Registration successful. Please login.", "success")
             return redirect(url_for('login'))
         except Exception as e:
-            flash("Username already taken or DB error.","warning")
+            flash(f"Registration failed: {str(e)}", "danger")
         finally:
             conn.close()
     return render_template('register.html')
